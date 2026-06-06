@@ -4,69 +4,175 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart Image Resizer & Optimizer</title>
-	    <link rel="icon" type="image/png" href="images/favicon.png">
+    <title>Image Manipulation Studio</title>
+    <link rel="icon" type="image/png" href="LOGO .png">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="marketing.css">
 </head>
 
-<body>
-    <div class="container">
-        <h2>Image Resizer & Compressor</h2>
+<body class="app-page">
+    <header class="app-header full-header">
+        <div style="display: flex; align-items: center; gap: 1rem;">
+            <h2 class="gradient-text" style="margin: 0;">Image Studio</h2>
+        </div>
+    </header>
 
-        <div class="drop-zone" id="dropZone">Drag & Drop or Click to Upload Image</div>
-        <input type="file" id="fileInput" accept="image/*" style="display:none;">
+    <main class="app-main full-screen-main">
+        <!-- Initial Upload State -->
+        <div id="uploadState" class="upload-state">
+            <div class="drop-zone massive-drop-zone" id="dropZone">
+                <div class="upload-icon">📁</div>
+                <h2>Upload an Image</h2>
+                <p>Drag & drop or click to start editing</p>
+                <input type="file" id="fileInput" accept="image/*" style="display:none;">
+            </div>
+        </div>
 
-        <img id="preview" style="display:none;" alt="Image Preview">
+        <!-- Editor State (Hidden initially) -->
+        <div id="editorState" class="editor-state" style="display: none;">
 
-        <div id="imageInfo" class="image-info" style="display:none;"></div>
+            <!-- Left Side: Preview Pane -->
+            <div class="preview-pane">
+                <div class="canvas-container">
+                    <img id="preview" alt="Live Preview" class="live-image">
+                    <img id="resizedPreview" style="display:none;" alt="Processed Preview" class="live-image">
+                </div>
+            </div>
 
-        <label><h2>Resolution</h2>
-            <input type="text" id="resolutionInput" placeholder="e.g., 1280x720 (Leave empty for original)">
-        </label>
+            <!-- Resizer Handle -->
+            <div class="resizer" id="dragResizer"></div>
 
-        <label>
-          <center><input type="checkbox" id="aspectRatioCheckbox"> <h2>Maintain Aspect Ratio</h2></center>
-        </label>
+            <!-- Right Side: Sidebar -->
+            <aside class="sidebar-pane glass-panel">
+                <div class="sidebar-scrollable">
+                    <div id="imageInfo" class="image-info glass-panel-inner" style="display:none;"></div>
+                    <div id="processedImageInfo" class="image-info glass-panel-inner"
+                        style="display:none; margin-top: 1rem;"></div>
 
-  <div class="slider-container">
-    <h2><label>Quality:
-        <input type="range" id="qualitySlider" min="10" max="100" value="80">
-    </label>
+                    <!-- Settings Section -->
+                    <section class="settings-section">
+                        <!-- Group 1: Resolution & Format -->
+                        <details class="settings-group" open>
+                            <summary>
+                                <h3>Output Settings</h3>
+                            </summary>
+                            <div class="resolution-inputs">
+                                <input type="number" id="widthInput" placeholder="Width">
+                                <span class="x-divider">×</span>
+                                <input type="number" id="heightInput" placeholder="Height">
+                            </div>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="aspectRatioCheckbox" checked>
+                                <span>Maintain Aspect Ratio</span>
+                            </label>
+                            <div class="quick-crops" style="margin-top: 1rem; display: flex; gap: 0.5rem;">
+                                <button id="crop11Btn" class="btn-secondary"
+                                    style="flex:1; padding: 0.5rem;">1:1</button>
+                                <button id="crop43Btn" class="btn-secondary"
+                                    style="flex:1; padding: 0.5rem;">4:3</button>
+                                <button id="crop169Btn" class="btn-secondary"
+                                    style="flex:1; padding: 0.5rem;">16:9</button>
+                            </div>
+                            <div style="margin-top:1rem; display: flex; gap: 0.5rem;">
+                                <select id="formatSelect" class="custom-select" style="flex: 1;">
+                                    <option value="image/png">PNG</option>
+                                    <option value="image/jpeg">JPEG</option>
+                                    <option value="image/webp">WEBP</option>
+                                </select>
+                                <input type="number" id="targetSizeInput" placeholder="Target Size (KB)"
+                                    style="flex: 1; padding: 0.5rem; background: rgba(0,0,0,0.3); border: 1px solid var(--glass-border); color: white; border-radius: 8px;">
+                            </div>
+                        </details>
 
-    <label>Brightness:
-        <input type="range" id="brightnessSlider" min="-100" max="100" value="0">
-    </label>
+                        <!-- Group 2: Transformations -->
+                        <details class="settings-group" open>
+                            <summary>
+                                <h3>Transformations</h3>
+                            </summary>
+                            <div class="transform-buttons">
+                                <button id="rotateLeftBtn" class="btn-secondary">↺ Left</button>
+                                <button id="rotateRightBtn" class="btn-secondary">↻ Right</button>
+                                <button id="flipHBtn" class="btn-secondary">⇄ Flip H</button>
+                                <button id="flipVBtn" class="btn-secondary">⇅ Flip V</button>
+                            </div>
+                            <div class="slider-container" style="margin-top: 1rem;">
+                                <label><span>Fine Rotation</span><span class="value-badge"
+                                        id="fineRotateValue">0°</span></label>
+                                <input type="range" id="fineRotateSlider" min="-45" max="45" value="0"
+                                    class="custom-slider">
+                            </div>
+                        </details>
 
-    <label>Contrast:
-        <input type="range" id="contrastSlider" min="-100" max="100" value="0">
-    </label></h2>
+                        <!-- Group 3: Adjustments -->
+                        <details class="settings-group">
+                            <summary>
+                                <h3>Adjustments</h3>
+                            </summary>
+                            <button id="autoEnhanceBtn" class="btn-primary"
+                                style="width: 100%; margin-bottom: 1rem; background: linear-gradient(135deg, #8b5cf6, #ec4899); border: none;">✨
+                                Auto-Enhance</button>
+                            <div class="slider-container">
+                                <label><span>Quality</span><span class="value-badge"
+                                        id="qualityValue">80%</span></label>
+                                <input type="range" id="qualitySlider" min="10" max="100" value="80"
+                                    class="custom-slider">
 
-  <center>  <div class="slider-values">
-       <span id="qualityValue">80%</span> |
-        <span id="brightnessValue">0</span> |
-        <span id="contrastValue">0</span>
-    </div></center>
-</div>
+                                <label><span>Brightness</span><span class="value-badge"
+                                        id="brightnessValue">0</span></label>
+                                <input type="range" id="brightnessSlider" min="-100" max="100" value="0"
+                                    class="custom-slider">
 
-        <label><center><h3>Output Format<h3></center>
-            <select id="formatSelect">
-                <option value="image/png">PNG</option>
-                <option value="image/jpeg">JPEG</option>
-                <option value="image/jpeg">JPG</option>
-            </select>
-        </label>
+                                <label><span>Contrast</span><span class="value-badge"
+                                        id="contrastValue">0</span></label>
+                                <input type="range" id="contrastSlider" min="-100" max="100" value="0"
+                                    class="custom-slider">
+                            </div>
+                        </details>
 
-        <button id="resizeBtn">Resize & Compress</button>
+                        <!-- Group 4: Advanced Filters -->
+                        <details class="settings-group">
+                            <summary>
+                                <h3>Advanced Filters</h3>
+                            </summary>
+                            <div class="slider-container">
+                                <label><span>Saturation</span><span class="value-badge"
+                                        id="saturationValue">100%</span></label>
+                                <input type="range" id="saturationSlider" min="0" max="200" value="100"
+                                    class="custom-slider">
 
-        <img id="resizedPreview" style="display:none;" alt="Resized Image Preview">
-        <div id="processedImageInfo" class="image-info" style="display:none;"></div>
-    </div>
+                                <label><span>Grayscale</span><span class="value-badge"
+                                        id="grayscaleValue">0%</span></label>
+                                <input type="range" id="grayscaleSlider" min="0" max="100" value="0"
+                                    class="custom-slider">
 
+                                <label><span>Sepia</span><span class="value-badge" id="sepiaValue">0%</span></label>
+                                <input type="range" id="sepiaSlider" min="0" max="100" value="0" class="custom-slider">
+
+                                <label><span>Blur (px)</span><span class="value-badge" id="blurValue">0</span></label>
+                                <input type="range" id="blurSlider" min="0" max="20" value="0" class="custom-slider">
+
+                                <label><span>Hue Rotate (deg)</span><span class="value-badge"
+                                        id="hueRotateValue">0</span></label>
+                                <input type="range" id="hueRotateSlider" min="-180" max="180" value="0"
+                                    class="custom-slider">
+
+                                <label><span>Invert</span><span class="value-badge" id="invertValue">0%</span></label>
+                                <input type="range" id="invertSlider" min="0" max="100" value="0" class="custom-slider">
+                            </div>
+                        </details>
+                    </section>
+
+                    <!-- Actions -->
+                    <section class="action-section">
+                        <button id="resizeBtn" class="btn-primary btn-large">Process Image</button>
+                        <button id="downloadBtn" class="btn-secondary btn-large"
+                            style="display:none; margin-top: 1rem;">Download Image</button>
+                    </section>
+                </div>
+            </aside>
+        </div>
+    </main>
     <script src="script.js"></script>
-<footer style="position: fixed; left: 0; bottom: 0; width: 100%; text-align: center; border-top: 2px ; padding: 5px 0; ">
-    <img src="images/footer.png" alt="Logo" style="height: 30px; width: 60px;">
-</footer>
-
 </body>
 
 </html>

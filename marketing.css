@@ -1,0 +1,274 @@
+/* SaaS Marketing Pages Styles */
+body.marketing-page {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    height: auto;
+    min-height: 100vh;
+    overflow-y: auto;
+    padding: 0;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 5%;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--glass-border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1.5rem;
+    font-weight: 800;
+    text-decoration: none;
+}
+
+.nav-logo {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.nav-links a {
+    color: var(--text-main);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--secondary);
+}
+
+/* Hero Section */
+.hero-section {
+    padding: 6rem 5%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.hero-title {
+    font-size: 4rem;
+    line-height: 1.1;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.hero-subtitle {
+    font-size: 1.25rem;
+    color: var(--text-muted);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.hero-cta {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+/* Features Grid */
+.features-section {
+    padding: 4rem 5%;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.feature-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 2rem;
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+}
+
+.feature-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.feature-card h3 {
+    color: var(--secondary);
+    margin-bottom: 1rem;
+}
+
+/* Pricing Section */
+.pricing-section {
+    padding: 5rem 5%;
+}
+
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.pricing-card {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    padding: 3rem 2rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.pricing-card.pro {
+    background: linear-gradient(135deg, rgba(220, 38, 38, 0.1), rgba(219, 39, 119, 0.1));
+    border-color: var(--primary);
+    position: relative;
+}
+
+.pro-badge {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(to right, var(--primary), var(--secondary));
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.price {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin: 1.5rem 0;
+}
+
+.price span {
+    font-size: 1rem;
+    color: var(--text-muted);
+}
+
+.pricing-features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2rem 0;
+    text-align: left;
+    flex-grow: 1;
+}
+
+.pricing-features li {
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.pricing-features li::before {
+    content: '✓';
+    color: var(--primary);
+    font-weight: bold;
+}
+
+/* Footer */
+.marketing-footer {
+    padding: 3rem 5%;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.5);
+    border-top: 1px solid var(--glass-border);
+    margin-top: auto;
+}
+
+/* Auth Pages */
+.auth-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 400px;
+    padding: 3rem 2rem;
+    text-align: center;
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.auth-form input {
+    width: 100%;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+    color: white;
+    font-size: 1rem;
+}
+
+.auth-form input:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+.auth-links {
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.auth-links a {
+    color: var(--primary);
+    text-decoration: none;
+}
+
+/* Freemium Badges in App */
+.premium-badge {
+    display: inline-block;
+    background: linear-gradient(to right, #ec4899, #8b5cf6);
+    color: white;
+    font-size: 0.6rem;
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-left: 8px;
+    font-weight: bold;
+    vertical-align: middle;
+}
