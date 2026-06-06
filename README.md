@@ -18,7 +18,7 @@
 [![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](#)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](#)
 [![Status: Production](https://img.shields.io/badge/Status-Production%20Ready-success?style=for-the-badge)](#)
-[![Type: Semester Project](https://img.shields.io/badge/Type-Semester%20Project-blueviolet?style=for-the-badge)](#)
+[![Type: Personal Project](https://img.shields.io/badge/Type-Personal%20Project-blueviolet?style=for-the-badge)](#)
 
 *Empowering creators with zero-latency, privacy-first photo editing directly in the browser.*
 
@@ -28,13 +28,13 @@
 
 ---
 
-## 📖 The Developers Story
+## 📖 The Developer's Story
 
 ### Project Inspiration
-ImageStudio was born out of a profound frustration with existing web-based photo editing platforms. As a semester project, the objective was initially simple: build a tool to resize images. However, as we evaluated the landscape, we noticed a disturbing trend. Most tools were either riddled with invasive advertisements, locked behind aggressive paywalls, or required users to upload their private photos to remote servers for processing. We realized the world didn't just need another image resizer; it needed a fundamentally different approach to web-based image manipulation. We drew inspiration from native desktop applications that provide instantaneous feedback and complete data privacy, aiming to replicate that experience entirely within the constraints of a modern web browser.
+ImageStudio was born out of a profound frustration with existing web-based photo editing platforms. As a personal curiosity project, the objective was initially simple: build a tool to resize images. However, as I evaluated the landscape, I noticed a disturbing trend. Most tools were either riddled with invasive advertisements, locked behind aggressive paywalls, or required users to upload their private photos to remote servers for processing. I realized the world didn't just need another image resizer; it needed a fundamentally different approach to web-based image manipulation. I drew inspiration from native desktop applications that provide instantaneous feedback and complete data privacy, aiming to replicate that experience entirely within the constraints of a modern web browser.
 
-### Meet the Team
-This project was driven by a passion for frontend engineering and deep technical problem-solving. As developers navigating the complexities of modern web APIs, we brought together a unique blend of skills. Our focus was singular: pushing the boundaries of what HTML5 Canvas and Vanilla JavaScript could achieve without relying on heavy frameworks like React or Angular. This project represents our collective dedication to craftsmanship, performance, and user-centric design.
+### The Solo Journey
+This project was driven by a passion for frontend engineering and deep technical problem-solving. As a solo developer navigating the complexities of modern web APIs, I wanted to explore what was possible. My focus was singular: pushing the boundaries of what HTML5 Canvas and Vanilla JavaScript could achieve without relying on heavy frameworks like React or Angular. This project represents my dedication to craftsmanship, performance, and user-centric design.
 
 ### The Challenge
 The core challenge was performance and privacy. How do you process high-resolution images—applying complex filters, rotations, and compression algorithms—without crashing the browser or causing UI freezing? Furthermore, how do you implement advanced features like a Target File Size optimizer (which requires multiple compression passes) while maintaining a sub-second response time? The challenge was not just writing the code, but architecting an execution flow that leveraged the browser's asynchronous capabilities to keep the main thread responsive, all while keeping 100% of the data on the client's machine.
@@ -58,11 +58,11 @@ Every UI decision was heavily debated. For instance, the transition from the lan
 **The Target File Size Problem:** The most significant technical challenge was the "Target File Size" feature. Compressing a JPEG to an exact kilobyte size is not a linear mathematical operation; it depends entirely on the entropy of the image. 
 **The Solution:** We implemented a custom Binary Search Algorithm. When a user requests a 300KB output, the engine rapidly processes the image in memory up to 7 times, continuously bisecting the quality parameter (between 0.01 and 1.0) until it finds the optimal compression ratio that mathematically fits under the target size. All of this happens asynchronously in milliseconds.
 
-### Collaboration Story
-Collaboration on this semester project required strict adherence to modular code design, even within a single monolithic JavaScript file. We separated concerns clearly: DOM selection at the top, state variables, event listeners, mathematical transformation logic, and finally, the rendering engine. This structured approach allowed us to debug complex rendering issues without breaking the UI event flow, demonstrating that disciplined engineering practices are just as important in vanilla JS as they are in complex framework-driven environments.
+### Architecture Story
+Building this personal project required strict adherence to modular code design, even within a single monolithic JavaScript file. I separated concerns clearly: DOM selection at the top, state variables, event listeners, mathematical transformation logic, and finally, the rendering engine. This structured approach allowed me to debug complex rendering issues without breaking the UI event flow, demonstrating that disciplined engineering practices are just as important in vanilla JS as they are in complex framework-driven environments.
 
 ### Lessons Learned
-We learned that the modern web browser is an incredibly powerful computation engine. We learned that relying on external libraries for everything often leads to bloated, slow applications, and that writing bespoke, highly optimized vanilla JavaScript can result in orders of magnitude better performance. We also learned the intricacies of the HTML5 Canvas API—specifically how transformation matrices (translate, rotate, scale) interact and how the order of operations fundamentally alters the final image output.
+I learned that the modern web browser is an incredibly powerful computation engine. I learned that relying on external libraries for everything often leads to bloated, slow applications, and that writing bespoke, highly optimized vanilla JavaScript can result in orders of magnitude better performance. I also learned the intricacies of the HTML5 Canvas API—specifically how transformation matrices (translate, rotate, scale) interact and how the order of operations fundamentally alters the final image output.
 
 ### Future Vision
 While ImageStudio is currently a robust standalone application, our future vision involves expanding it into a Progressive Web App (PWA) with offline capabilities. We envision implementing WebGL or WebGPU for hardware-accelerated image filtering, allowing for complex localized edits (like healing brushes or intelligent object removal) that currently stretch the limits of the standard 2D Canvas context.
@@ -70,8 +70,8 @@ While ImageStudio is currently a robust standalone application, our future visio
 ### Behind the Name
 The name "ImageStudio" reflects our ambition. It is not an "optimizer" or a "resizer"; it is a *Studio*. It implies a professional workspace where creators have granular control over every aspect of their visual assets. It represents a paradigm shift from simple utility tools to comprehensive, professional-grade web applications.
 
-### Message from the Developers
-To our professors, peers, and anyone who uses this project: ImageStudio represents countless late nights, deep dives into MDN documentation, and a relentless pursuit of excellence. We hope that using this tool feels as seamless and powerful as it was challenging and rewarding to build. Thank you for exploring our semester project.
+### Message from the Developer
+To anyone who uses this project: ImageStudio represents countless late nights, deep dives into MDN documentation, and a relentless pursuit of excellence. I hope that using this tool feels as seamless and powerful as it was challenging and rewarding to build. Thank you for exploring my curiosity project.
 
 ---
 
@@ -493,31 +493,6 @@ We welcome contributions to expand the toolkit! To contribute:
 ## 📄 License
 
 This project is licensed under the **MIT License**.
-
-```text
-MIT License
-
-Copyright (c) 2026 ImageStudio Developers
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-```
-
 ---
 <div align="center">
   <i>Built with passion and pure Vanilla Javascript.</i>
